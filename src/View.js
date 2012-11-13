@@ -87,6 +87,7 @@
 	life.View.prototype.update = function() {
 		var alive = 0;
 		var total = 0;
+		var displayCellSize = this.cellSize + this.pixel;
 
 		if(this.started) {
 			_.each(this.model.grid, function(square) {
@@ -107,7 +108,7 @@
 				color = "white";
 			}
 			this.ctx.fillStyle = color;
-			this.ctx.fillRect(square.getX() * this.cellSize, square.getY() * this.cellSize, this.cellSize + this.pixel, this.cellSize + this.pixel);
+			this.ctx.fillRect(square.getX() * this.cellSize, square.getY() * this.cellSize, displayCellSize, displayCellSize);
 		}, this);
 
 		$("#generation .value").text(this.model.generation);

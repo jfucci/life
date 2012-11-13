@@ -114,6 +114,11 @@
 		this.surviveConditions = [1, 2, 3, 4, 5];
 	};
 
+	life.Model.prototype.setup34Life = function() {
+		this.bornConditions = [3, 4];
+		this.surviveConditions = [3, 4];
+	};
+
 	life.Model.prototype.chooseMode = function() {
 		switch(this.mode) {
 			case "standard":
@@ -148,6 +153,9 @@
 				break;
 			case "maze":
 				this.setupMaze();
+				break;
+			case "34life":
+				this.setup34Life();
 				break;
 		}
 	};
