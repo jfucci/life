@@ -59,103 +59,48 @@
 		}, this);
 	};
 
-	life.Model.prototype.setupStandard = function() {
-		this.bornConditions = [3];
-		this.surviveConditions = [2, 3];
-	};
-
-	life.Model.prototype.setupHigh = function() {
-		this.bornConditions = [3, 6];
-		this.surviveConditions = [2, 3];
-	};
-
-	life.Model.prototype.setupSeeds = function() {
-		this.bornConditions = [2];
-		this.surviveConditions = [];
-	};
-
-	life.Model.prototype.setupServiettes = function() {
-		this.bornConditions = [2, 3, 4];
-		this.surviveConditions = [];
-	};
-
-	life.Model.prototype.setupGnarl = function() {
-		this.bornConditions = [1];
-		this.surviveConditions = [1];
+	life.Model.prototype.setupMode = function(bornConditions, surviveConditions) {
+		this.bornConditions = bornConditions;
+		this.surviveConditions = surviveConditions;
 	}
-
-	life.Model.prototype.setupLWD = function() {
-		this.bornConditions = [3];
-		this.surviveConditions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-	}
-
-	life.Model.prototype.setupDN = function() {
-		this.bornConditions = [3, 6, 7, 8];
-		this.surviveConditions = [3, 4, 6, 7, 8];
-	};
-
-	life.Model.prototype.setup2By2 = function() {
-		this.bornConditions = [3, 6];
-		this.surviveConditions = [1, 2, 5];
-	};
-
-	life.Model.prototype.setupAmoeba = function() {
-		this.bornConditions = [3, 5, 7];
-		this.surviveConditions = [1, 3, 5, 8];
-	};
-
-	life.Model.prototype.setupReplicator = function() {
-		this.bornConditions = [1, 3, 5, 7];
-		this.surviveConditions = [1, 3, 5, 7];
-	};
-
-	life.Model.prototype.setupMaze = function() {
-		this.bornConditions = [3, 7];
-		this.surviveConditions = [1, 2, 3, 4, 5];
-	};
-
-	life.Model.prototype.setup34Life = function() {
-		this.bornConditions = [3, 4];
-		this.surviveConditions = [3, 4];
-	};
 
 	life.Model.prototype.chooseMode = function() {
 		switch(this.mode) {
 			case "standard":
-				this.setupStandard(); 
+				this.setupMode([3], [2, 3]); 
 				break;
 			case "high":
-				this.setupHigh();
+				this.setupMode([3, 6], [2, 3]);
 				break;
 			case "seeds":
-				this.setupSeeds();
+				this.setupMode([2], []);
 				break;
 			case "serviettes":
-				this.setupServiettes();
+				this.setupMode([2, 3, 4], []);
 				break;
 			case "gnarl":
-				this.setupGnarl();
+				this.setupMode([1], [1]);
 				break;
 			case "lwd":
-				this.setupLWD();
+				this.setupMode([3], [0, 1, 2, 3, 4, 5, 6, 7, 8]);
 				break;
 			case "dn":
-				this.setupDN();
+				this.setupMode([3, 6, 7, 8], [3, 4, 6, 7, 8]);
 				break;
 			case "2x2":
-				this.setup2By2();
+				this.setupMode([3, 6], [1, 2, 5]);
 				break;
 			case "amoeba":
-				this.setupAmoeba();
+				this.setupMode([3, 5, 7], [1, 3, 5, 8]);
 				break;
 			case "replicator":
-				this.setupReplicator();
+				this.setupMode([1, 3, 5, 7], [1, 3, 5, 7]);
 				break;
 			case "maze":
-				this.setupMaze();
+				this.setupMode([3, 7], [1, 2, 3, 4, 5]);
 				break;
 			case "34life":
-				this.setup34Life();
+				this.setupMode([3, 4], [3, 4]);
 				break;
 		}
 	};
