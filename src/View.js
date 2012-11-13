@@ -27,6 +27,8 @@
 		this.cellSize = 1 / this.model.getGridSize();
 		this.started = false;
 		//this.mouseMode = ""; attempt at click-and-drag; see mouseClick and mouseMove below
+		this.bornConditions = [3];
+		this.surviveConditions = [2, 3];
 	};
 
 	life.View.prototype._mouseClick = function(event) {
@@ -84,112 +86,99 @@
 		return y;
 	};
 
-	life.View.prototype.stepStandard = function() {
-		_.each(this.model.grid, function(square) {
-			if(square.neighbors === 3) {
-				square.isAliveNow = true;
-			} else if(square.neighbors < 2 || square.neighbors > 3) {
-				square.isAliveNow = false;
-			} 
-		}, this);
+
+	life.View.prototype.setupStandard = function() {
+		this.bornConditions = [3];
+		this.surviveConditions = [2, 3];
 	};
 
-	life.View.prototype.stepHigh = function() {
-		_.each(this.model.grid, function(square) {
-			if(square.neighbors === 3 || square.neighbors === 6) {
-				square.isAliveNow = true;
-			} else if(square.neighbors < 2 || square.neighbors > 3) {
-				square.isAliveNow = false;
-			}
-		}, this);
+	life.View.prototype.setupHigh = function() {
+		this.bornConditions = [3, 6];
+		this.surviveConditions = [2, 3];
 	};
 
-	life.View.prototype.stepSeeds = function() {
-		_.each(this.model.grid, function(square) {
-			square.isAliveNow = false;
-			if (!square.isAlive && square.neighbors === 2){	
-				square.isAliveNow = true;
-			}
-		}, this);
+	life.View.prototype.setupSeeds = function() {
+		this.bornConditions = [2];
+		this.surviveConditions = [];
 	};
 
-	life.View.prototype.stepServiettes = function() {
-		_.each(this.model.grid, function(square) {
-			square.isAliveNow = false;
-			if (!square.isAlive && square.neighbors >= 2 && square.neighbors <= 4){	
-				square.isAliveNow = true;
-			}
-		}, this);
+	life.View.prototype.setupServiettes = function() {
+		this.bornConditions = [2, 3, 4];
+		this.surviveConditions = [];
 	};
 
-	life.View.prototype.stepGnarl = function() {
-		_.each(this.model.grid, function(square) {
-			if(square.neighbors === 1) {
-				square.isAliveNow = true;
-			} else {
-				square.isAliveNow = false;
-			}
-		}, this);
+	life.View.prototype.setupGnarl = function() {
+		this.bornConditions = [1];
+		this.surviveConditions = [1];
 	}
 
-	life.View.prototype.stepLWD = function() {
-		_.each(this.model.grid, function(square) {
-			if(square.neighbors === 3) {
-				square.isAliveNow = true;
-			}
-		}, this);
+	life.View.prototype.setupLWD = function() {
+		this.bornConditions = [3];
+		this.surviveConditions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	}
 
-	life.View.prototype.stepDN = function() {
-		_.each(this.model.grid, function(square) {
-			if(square.neighbors === 3 || square.neighbors >= 6) {
-				square.isAliveNow = true;
-			} else if(square.neighbors < 3 || square.neighbors === 5) {
-				square.isAliveNow = false;
-			}
-		}, this);
+	life.View.prototype.setupDN = function() {
+		this.bornConditions = [3, 6, 7, 8];
+		this.surviveConditions = [3, 4, 6, 7, 8];
 	};
 
-	life.View.prototype.step2By2 = function() {
-		_.each(this.model.grid, function(square) {
-			if(!square.isAlive && (square.neighbors === 3 || square.neighbors === 6)) {
-				square.isAliveNow = true;
-			} else if(square.neighbors === 0 || (square.neigbors > 3 && square.neighbors !== 5)) {
-				square.isAliveNow = false; 
-			} 
-		}, this);
+	life.View.prototype.setup2By2 = function() {
+		this.bornConditions = [3, 6];
+		this.surviveConditions = [1, 2, 5];
 	};
 
-	life.View.prototype.stepAmoeba = function() {
-		_.each(this.model.grid, function(square) {
-			if(!square.isAlive && (square.neighbors === 3 || square.neighbors === 5 || square.neighbors === 7)) {
-				square.isAliveNow = true;
-			} 
-			else if((square.neighbors % 2 === 0 && square.neighbors !== 8) || square.neighbors === 7) {
-				square.isAliveNow = false; 
-			}
-		}, this);
+	life.View.prototype.setupAmoeba = function() {
+		this.bornConditions = [3, 5, 7];
+		this.surviveConditions = [1, 3, 5, 8];
 	};
 
-	life.View.prototype.stepReplicator = function() {
-		_.each(this.model.grid, function(square) {
-			if(square.neighbors % 2 === 1) {
-				square.isAliveNow = true;
-			} else {
-				square.isAliveNow = false;
-			}
-		}, this);
+	life.View.prototype.setupReplicator = function() {
+		this.bornConditions = [1, 3, 5, 7];
+		this.surviveConditions = [1, 3, 5, 7];
 	};
 
-	life.View.prototype.stepMaze = function() {
-		_.each(this.model.grid, function(square) {
-			if(!square.isAlive && (square.neighbors === 3 || square.neighbors === 7)) {
-				square.isAliveNow = true;
-			} else if(square.neighbors > 5){
-				square.isAliveNow = false;
-			}
-		}, this);
+	life.View.prototype.setupMaze = function() {
+		this.bornConditions = [3, 7];
+		this.surviveConditions = [1, 2, 3, 4, 5];
 	};
+
+	life.View.prototype.chooseMode = function() {
+		switch(this.model.mode) {
+			case "standard":
+				this.setupStandard();
+				break;
+			case "high":
+				this.setupHigh();
+				break;
+			case "seeds":
+				this.setupSeeds();
+				break;
+			case "serviettes":
+				this.setupServiettes();
+				break;
+			case "gnarl":
+				this.setupGnarl();
+				break;
+			case "lwd":
+				this.setupLWD();
+				break;
+			case "dn":
+				this.setupDN();
+				break;
+			case "2x2":
+				this.setup2By2();
+				break;
+			case "amoeba":
+				this.setupAmoeba();
+				break;
+			case "replicator":
+				this.setupReplicator();
+				break;
+			case "maze":
+				this.setupMaze();
+				break;
+		}
+	}
 
 	life.View.prototype.update = function() {
 
@@ -197,41 +186,13 @@
 		var total = 0;
 
 		if(this.started) {
-			switch(this.model.mode) {
-				case "standard":
-					this.stepStandard();
-					break;
-				case "high":
-					this.stepHigh();
-					break;
-				case "seeds":
-					this.stepSeeds();
-					break;
-				case "serviettes":
-					this.stepServiettes();
-					break;
-				case "gnarl":
-					this.stepGnarl();
-					break;
-				case "lwd":
-					this.stepLWD();
-					break;
-				case "dn":
-					this.stepDN();
-					break;
-				case "2x2":
-					this.step2By2();
-					break;
-				case "amoeba":
-					this.stepAmoeba();
-					break;
-				case "replicator":
-					this.stepReplicator();
-					break;
-				case "maze":
-					this.stepMaze();
-					break;
-			}
+			_.each(this.model.grid, function(square) {
+				if(!square.isAlive && _.contains(this.bornConditions, square.neighbors)) {
+					square.isAliveNow = true;
+				} else if(!(_.contains(this.surviveConditions, square.neighbors))) {
+					square.isAliveNow = false;
+				} 
+			}, this);
 		}
 
 		_.each(this.model.grid, function(square) {
