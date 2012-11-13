@@ -62,46 +62,46 @@
 	life.Model.prototype.setupMode = function(bornConditions, surviveConditions) {
 		this.bornConditions = bornConditions;
 		this.surviveConditions = surviveConditions;
-	}
+	};
 
 	life.Model.prototype.chooseMode = function() {
 		switch(this.mode) {
-			case "standard":
-				this.setupMode([3], [2, 3]); 
-				break;
-			case "high":
-				this.setupMode([3, 6], [2, 3]);
-				break;
-			case "seeds":
-				this.setupMode([2], []);
-				break;
-			case "serviettes":
-				this.setupMode([2, 3, 4], []);
-				break;
-			case "gnarl":
-				this.setupMode([1], [1]);
-				break;
-			case "lwd":
-				this.setupMode([3], [0, 1, 2, 3, 4, 5, 6, 7, 8]);
-				break;
-			case "dn":
-				this.setupMode([3, 6, 7, 8], [3, 4, 6, 7, 8]);
-				break;
-			case "2x2":
-				this.setupMode([3, 6], [1, 2, 5]);
-				break;
-			case "amoeba":
-				this.setupMode([3, 5, 7], [1, 3, 5, 8]);
-				break;
-			case "replicator":
-				this.setupMode([1, 3, 5, 7], [1, 3, 5, 7]);
-				break;
-			case "maze":
-				this.setupMode([3, 7], [1, 2, 3, 4, 5]);
-				break;
-			case "34life":
-				this.setupMode([3, 4], [3, 4]);
-				break;
+		case "standard":
+			this.setupMode([3], [2, 3]);
+			break;
+		case "high":
+			this.setupMode([3, 6], [2, 3]);
+			break;
+		case "seeds":
+			this.setupMode([2], []);
+			break;
+		case "serviettes":
+			this.setupMode([2, 3, 4], []);
+			break;
+		case "gnarl":
+			this.setupMode([1], [1]);
+			break;
+		case "lwd":
+			this.setupMode([3], [0, 1, 2, 3, 4, 5, 6, 7, 8]);
+			break;
+		case "dn":
+			this.setupMode([3, 6, 7, 8], [3, 4, 6, 7, 8]);
+			break;
+		case "2x2":
+			this.setupMode([3, 6], [1, 2, 5]);
+			break;
+		case "amoeba":
+			this.setupMode([3, 5, 7], [1, 3, 5, 8]);
+			break;
+		case "replicator":
+			this.setupMode([1, 3, 5, 7], [1, 3, 5, 7]);
+			break;
+		case "maze":
+			this.setupMode([3, 7], [1, 2, 3, 4, 5]);
+			break;
+		case "34life":
+			this.setupMode([3, 4], [3, 4]);
+			break;
 		}
 	};
 

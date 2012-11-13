@@ -23,7 +23,7 @@
 
 		this.canvas.click(_.bind(this._mouseClick, this));
 		//this.canvas.mousemove(_.bind(this._mouseMove, this));
-
+		
 		this.cellSize = 1 / this.model.getGridSize();
 		this.started = false;
 		//this.mouseMode = ""; attempt at click-and-drag; see mouseClick and mouseMove below
@@ -95,7 +95,7 @@
 					square.isAliveNow = true;
 				} else if(!(_.contains(this.model.surviveConditions, square.neighbors))) {
 					square.isAliveNow = false;
-				} 
+				}
 			}, this);
 		}
 

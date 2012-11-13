@@ -12,12 +12,16 @@
 		};
 		//#of millis to delay between steps
 		//this.stepDelay = 50;
-
 		this.model = new life.Model(setup);
 		this.view = new life.View(this.model);
 		this.interval = null;
 
-		$("#percentAlive").slider({max:1, min:0, step:0.01, value:0.25});
+		$("#percentAlive").slider({
+			max: 1,
+			min: 0,
+			step: 0.01,
+			value: 0.25
+		});
 
 		$('#random').click(_.bind(function() {
 			this.resetInterval();
@@ -31,14 +35,17 @@
 		$("#mode").css('width', '500px').buttonset();
 
 		$('input:radio[name=mode]').click(_.bind(function() {
-  			this.model.mode = $('input:radio[name=mode]:checked').attr('id');
-  			this.model.chooseMode();
+			this.model.mode = $('input:radio[name=mode]:checked').attr('id');
+			this.model.chooseMode();
 		}, this));
 
-		$("#time").slider({max:500, min:25, step:25, value:50,
+		$("#time").slider({
+			max: 500,
+			min: 25,
+			step: 25,
+			value: 50,
 			stop: _.bind(function() {
 				this.stepDelay = $("#time").slider("value");
-				console.log(this.stepDelay);
 				if(this.interval !== null) {
 					this.resetInterval();
 					this.interval = window.setInterval(_.bind(this.step, this), this.stepDelay);
@@ -90,6 +97,6 @@
 	life.Controller.prototype.resetInterval = function() {
 		window.clearInterval(this.interval);
 		this.interval = null;
-	}
+	};
 
 }());
