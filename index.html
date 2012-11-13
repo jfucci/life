@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Life</title>
+
+        <link rel="stylesheet" href="life.css" type="text/css" />
+        
+        <script src="lib/jquery1.8.2.js" type="text/javascript"></script>
+        <script src="lib/underscore.js" type="text/javascript"></script>
+        <script src="lib/jquery-ui1.9.1.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            var life = {};
+        </script>
+        <script type="text/javascript" src="src/Util.js"></script>
+        <script type="text/javascript" src="src/Model.js"></script>
+        <script type="text/javascript" src="src/View.js"></script>
+        <script type="text/javascript" src="src/Controller.js"></script>
+    </head>
+    <body>
+        <div id="canvas_wrap"><canvas id="canvas"></canvas></div>
+        <div id="controls">
+            <h3>Life</h3>
+            <div class="stats">
+                <div id="alive">
+                    Alive:
+                    <div><span class="value">--</span>%</div>
+                </div>
+                <div id="generation">
+                    Generation:
+                    <div><span class="value">--</span></div>
+                </div>
+            </div>
+            Percent Alive for Random:<div id="percentAlive"></div>
+            <br/>
+            <a class="btn" id="random">Random</a>
+            <br/><br/>
+            <hr/>
+            <form>
+                <div id="mode">
+                    <input type="radio" id="standard" name="mode" checked /><label for="standard">Standard</label>
+                    <input type="radio" id="high" name="mode"/><label for="high">High Life</label>
+                    <input type="radio" id="seeds" name="mode"/><label for="seeds">Seeds</label>
+                    <input type="radio" id="serviettes" name="mode"/><label for="serviettes">Serviettes</label>
+                    <input type="radio" id="gnarl" name="mode"/><label for="gnarl">Gnarl</label>
+                    <input type="radio" id="lwd" name="mode"/><label for="lwd">Life Without Death</label>
+                    <input type="radio" id="dn" name="mode"/><label for="dn">Day and Night</label>
+                    <input type="radio" id="2x2" name="mode"/><label for="2x2">2 x 2</label> 
+                    <input type="radio" id="amoeba" name="mode"/><label for="amoeba">Amoeba</label>
+                    <input type="radio" id="replicator" name="mode"/><label for="replicator">Replicator</label>
+                    <input type="radio" id="maze" name="mode"/><label for="maze">Maze</label>
+                </div>
+            </form>
+            <hr/>
+            Time Between Generations:<div id="time"></div>
+            <br/>
+            <a class="btn" id="start">Start</a>
+            <a class="btn" id="step">Step</a>
+            <a class="btn" id="clear">Clear</a>
+        </div>
+  </body>  
+</html>
