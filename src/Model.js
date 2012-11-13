@@ -13,6 +13,8 @@
 		}, this);
 		this.generation = 0;
 		this.mode = "standard";
+		this.bornConditions = [3];
+		this.surviveConditions = [2, 3];
 	};
 
 	life.Model.prototype.restart = function() {
@@ -55,6 +57,99 @@
 		_.each(square.neighborArray, function(neighbor) {
 			this.grid[neighbor].neighbors++;
 		}, this);
+	};
+
+	life.Model.prototype.setupStandard = function() {
+		this.bornConditions = [3];
+		this.surviveConditions = [2, 3];
+	};
+
+	life.Model.prototype.setupHigh = function() {
+		this.bornConditions = [3, 6];
+		this.surviveConditions = [2, 3];
+	};
+
+	life.Model.prototype.setupSeeds = function() {
+		this.bornConditions = [2];
+		this.surviveConditions = [];
+	};
+
+	life.Model.prototype.setupServiettes = function() {
+		this.bornConditions = [2, 3, 4];
+		this.surviveConditions = [];
+	};
+
+	life.Model.prototype.setupGnarl = function() {
+		this.bornConditions = [1];
+		this.surviveConditions = [1];
+	}
+
+	life.Model.prototype.setupLWD = function() {
+		this.bornConditions = [3];
+		this.surviveConditions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+	}
+
+	life.Model.prototype.setupDN = function() {
+		this.bornConditions = [3, 6, 7, 8];
+		this.surviveConditions = [3, 4, 6, 7, 8];
+	};
+
+	life.Model.prototype.setup2By2 = function() {
+		this.bornConditions = [3, 6];
+		this.surviveConditions = [1, 2, 5];
+	};
+
+	life.Model.prototype.setupAmoeba = function() {
+		this.bornConditions = [3, 5, 7];
+		this.surviveConditions = [1, 3, 5, 8];
+	};
+
+	life.Model.prototype.setupReplicator = function() {
+		this.bornConditions = [1, 3, 5, 7];
+		this.surviveConditions = [1, 3, 5, 7];
+	};
+
+	life.Model.prototype.setupMaze = function() {
+		this.bornConditions = [3, 7];
+		this.surviveConditions = [1, 2, 3, 4, 5];
+	};
+
+	life.Model.prototype.chooseMode = function() {
+		switch(this.mode) {
+			case "standard":
+				this.setupStandard(); 
+				break;
+			case "high":
+				this.setupHigh();
+				break;
+			case "seeds":
+				this.setupSeeds();
+				break;
+			case "serviettes":
+				this.setupServiettes();
+				break;
+			case "gnarl":
+				this.setupGnarl();
+				break;
+			case "lwd":
+				this.setupLWD();
+				break;
+			case "dn":
+				this.setupDN();
+				break;
+			case "2x2":
+				this.setup2By2();
+				break;
+			case "amoeba":
+				this.setupAmoeba();
+				break;
+			case "replicator":
+				this.setupReplicator();
+				break;
+			case "maze":
+				this.setupMaze();
+				break;
+		}
 	};
 
 	life.Square = function(x, y, gridSize) {

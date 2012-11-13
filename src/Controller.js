@@ -32,7 +32,7 @@
 
 		$('input:radio[name=mode]').click(_.bind(function() {
   			this.model.mode = $('input:radio[name=mode]:checked').attr('id');
-  			this.view.chooseMode();
+  			this.model.chooseMode();
 		}, this));
 
 		$("#time").slider({max:500, min:25, step:25, value:50,
