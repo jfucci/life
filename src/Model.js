@@ -36,7 +36,9 @@
 	};
 
 	life.Model.prototype.isRunning = function() {
-		return true;
+		return _.any(this.grid, function(square) {
+			return square.isAlive;
+		}, this);
 	};
 
 	life.Model.prototype.step = function() {
