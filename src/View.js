@@ -102,12 +102,11 @@
 		_.each(this.model.grid, function(square) {
 			square.isAlive = square.isAliveNow;
 			total++;
-			var color = "black";
+			this.ctx.fillStyle = "black";
 			if(square.isAlive) {
 				alive++;
-				color = "white";
+				this.ctx.fillStyle = "white";
 			}
-			this.ctx.fillStyle = color;
 			this.ctx.fillRect(square.getX() * this.cellSize, square.getY() * this.cellSize, displayCellSize, displayCellSize);
 		}, this);
 

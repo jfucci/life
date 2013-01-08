@@ -89,8 +89,8 @@
 		this.model.step();
 		this.view.update();
 		if(!this.model.isRunning()) {
-			window.clearInterval(this.interval);
-			this.interval = null;
+			this.resetInterval();
+			this.view.started = false;
 		}
 	};
 

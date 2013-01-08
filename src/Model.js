@@ -41,6 +41,22 @@
 		}, this);
 	};
 
+	life.Model.prototype.getNeighbors = function(square){
+		var grid = this.grid;
+		var gridSize = this.getGridSize();
+		return _.chain(_.range(-1,2))
+		    .repeat(2)
+		    .product()
+		    .reject(_.bind(_.isEqual,null,[0,0]))
+		    .map(function(offset){
+		      var x = offset[0]+square.getX();
+		      var y = offset[1]+square.getY();
+		      return grid[[(x+gridSize)%gridSize, (y+gridSize)%gridSize]]; // apply periodic boundaries
+		       //n.b. javascript's % is broken in that -1 % 5 === -1 (should be 4)
+		    })
+		    .value();
+	};
+
 	life.Model.prototype.step = function() {
 		this.generation++;
 
